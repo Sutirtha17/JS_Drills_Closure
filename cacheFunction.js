@@ -1,12 +1,11 @@
 export default function cacheFunction(cb) {
-  let cache = new Set();
+  let cache = {};
   return (num) => {
-    if (cache.has(num)) {
-      return cache;
+    if (cache[num] == undefined) {
+      cache[num] = cb(num);
+      return cache[num];
     } else {
-      cache.add(num);
-      cb(num);
-      return cache;
+      return cache[num];
     }
   };
 }
